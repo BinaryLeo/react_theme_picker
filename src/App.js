@@ -1,9 +1,8 @@
-import './App.css';
+import ColorPicker from './compoments/colorpicker';
 
 function App() {
   return (
-    <h1>Test</h1>
+      <ColorPicker/>
   );
 }
-
 export default App;
