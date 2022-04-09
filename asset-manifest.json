@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-theme-picker/static/css/main.742c7542.css",
+    "main.js": "/react-theme-picker/static/js/main.df2695fc.js",
+    "index.html": "/react-theme-picker/index.html",
+    "main.742c7542.css.map": "/react-theme-picker/static/css/main.742c7542.css.map",
+    "main.df2695fc.js.map": "/react-theme-picker/static/js/main.df2695fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.742c7542.css",
+    "static/js/main.df2695fc.js"
+  ]
+}
