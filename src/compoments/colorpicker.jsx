@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import './colorpicker.scss'
-let lista = []
+
+let colours = []
 const ColorPicker = () => {
   const [color, setColor] = useState('#1d5e9f') //* useState to change the baksground color
   const [current, setCurrent] = useState([]) //* useState to add color to the list
@@ -17,11 +18,11 @@ const ColorPicker = () => {
     alert('copied to clipboard')
   }
   function handleColorsList() {
-    if (lista.includes(color)) {
+    if (colours.includes(color)) {
       alert('Color already in the list')
     } else {
-      setCurrent(lista)
-      lista.push(color)
+      setCurrent(colours)
+      colours.push(color)
     }
   }
   /*

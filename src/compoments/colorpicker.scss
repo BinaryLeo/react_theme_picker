@@ -28,6 +28,10 @@
             border-radius: 15px;
             border: 1px solid #fff;
             overflow: auto;
+            .items {
+                margin-top: 5px;
+                font-size: 0.8rem;
+            }
         }
     }
     h1 {
