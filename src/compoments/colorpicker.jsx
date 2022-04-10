@@ -1,52 +1,78 @@
-import React, { useState } from 'react'
-import { HexColorPicker } from 'react-colorful'
-import './colorpicker.scss'
+import React, {useState, useEffect} from 'react';
+import { HexColorPicker } from 'react-colorful';
+import './colorpicker.scss';
 
-let colours = []
+let colours =[]; //** ! An array of all the selected colours from the color picker
+let alfa = ["#a", "#b", "#c", "#d", "#e", "#f","#8"] ;
+//Todo Improve the alfa array - There are some colors that are not working properly with theming contrast
+
+//** */ an array of all first 2 characters of hex colour to be used to change the app theme
+
 const ColorPicker = () => {
-  const [color, setColor] = useState('#1d5e9f') //* useState to change the baksground color
-  const [current, setCurrent] = useState([]) //* useState to add color to the list
+  const [color, setColor] = useState('#1d5e9f'); //** Background colour of the app
+  const [current, setCurrent] = useState([]); //* -> '[#hex' , '#hex' , ...]
+  //** */ An array of selected colours from the color picker - We gonna add these colors to clipboard
+  const[theme, setTheme] = useState('colorLight');
+  //* By default the app theme is light due the color picker selected is dark (Contrast)
 
-  function copyToClipboard() {
-    //* add to clipboard
-    navigator.clipboard.writeText(color) //* copy a single color
-    alert(`${color} copied to clipboard`)
+  function copyToClipboard(){
+    navigator.clipboard.writeText(color); //** Copy the selected color to clipboard
+    alert(`${color} copied to clipboard`); //** Alert the user that the color has been copied to clipboard
   }
-  function copyListToClipboard() {
-    //* add to clipboard
-    navigator.clipboard.writeText(current) //* copy whole list
-    alert('copied to clipboard')
+
+  function copyListToClipboard(){
+    navigator.clipboard.writeText(current) //* Copy whole list
+    alert('copied to clipboard');
   }
-  function handleColorsList() {
-    if (colours.includes(color)) {
-      alert('Color already in the list')
-    } else {
-      setCurrent(colours)
-      colours.push(color)
+  
+  function handleColorsList(){
+    if(colours.includes(color)){ //* Prevent duplicates
+      alert('Color already in list');
+    }else{
+      setCurrent(colours);
+      colours.push(color);
     }
   }
-  /*
-   * 1. Returns the current color to background
-   * 2. onclick add the selected color to the list
-   * 3. Map the colours list and dynamically add the color to the <li> element
-   * 4.Copy the whole list to clipboard
-   */
-  return (
+  useEffect(() => { // theming the app
+    if (theme === 'colorDark') {
+      document.documentElement.style.setProperty("--color", "#232327");
+      document.documentElement.style.setProperty("--border", "#232327");
+      document.documentElement.style.setProperty("--text", "#232327");
+      document.documentElement.style.setProperty("--bg", "#dedfd");
+
+    } else {
+      document.documentElement.style.setProperty("--color", "#fff");
+      document.documentElement.style.setProperty("--border", "#fff");
+      document.documentElement.style.setProperty("--text", "#fff");
+      document.documentElement.style.setProperty("--bg", "#fff");
+    }
+  }, [theme]);
+  return(
+    //div receives the current color from the color picker as background
     <div className="container" style={{ background: `${color}` }}>
-      <h1>Color Picker</h1>
-      <div className="grid">
-        <HexColorPicker color={color} onChange={setColor} />
-        <div className="list">
-          <ul className="items">
-            {current.map((currentItem, i) => (
-              <div key={i}> {currentItem} </div>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <h1>Current color is ... {color}</h1>
-      <div className="wrapper">
-        <button
+
+    <h1>Color Picker</h1> {/* << Use Theming*/}
+    <div className="grid">
+
+    <HexColorPicker color={color} onChange={(color)=>{
+          setColor(color); //** */ set the current color to background
+          alfa.includes(color.slice(0,2)) ? setTheme('colorDark') : setTheme('colorLight');
+          //console.log(theme)
+        }} />
+   
+    <div className="list">
+    <ul>
+    {current.map((currentItem,i)=>( //* map the current array to the list
+      <div key={i}>{currentItem}</div>
+    )
+    )}
+    </ul>
+    </div>
+    </div>
+    <h1>Current color is ... {color}</h1> {/* << apply theming*/}
+    <div className="wrapper">
+    {/* << apply theming*/}
+    <button
           onClick={() => {
             copyToClipboard()
           }}
@@ -54,16 +80,18 @@ const ColorPicker = () => {
         >
           Add to Clipboard
         </button>
+         {/* << apply theming*/}
         <button
           onClick={() => {
             handleColorsList();
             setColor();
-            console.log(current)
+            //console.log(current)
           }}
           className="btn"
         >
           Add to list
         </button>
+         {/* << apply theming*/}
         <button
           onClick={() => {
             copyListToClipboard();
@@ -72,9 +100,9 @@ const ColorPicker = () => {
         >
           Copy the list
         </button>
-      </div>
+    </div>
     </div>
   )
 }
 
-export default ColorPicker
+export default ColorPicker;
