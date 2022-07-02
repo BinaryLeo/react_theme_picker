@@ -10,7 +10,7 @@ let alfa = ["#a", "#b", "#c", "#d", "#e", "#f","#8"] ;
 
 const ColorPicker = () => {
   const [color, setColor] = useState('#1d5e9f'); //** Background colour of the app
-  const [current, setCurrent] = useState([]); //* -> '[#hex' , '#hex' , ...]
+  const [current, setCurrent] = useState([]); //* -> '#hex' , '#hex' , ...
   //** */ An array of selected colours from the color picker - We gonna add these colors to clipboard
   const[theme, setTheme] = useState('colorLight');
   //* By default the app theme is light due the color picker selected is dark (Contrast)
@@ -51,7 +51,7 @@ const ColorPicker = () => {
     //div receives the current color from the color picker as background
     <div className="container" style={{ background: `${color}` }}>
 
-    <h1>Color Picker</h1> {/* << Use Theming*/}
+    <h1>Color Picker</h1> 
     <div className="grid">
 
     <HexColorPicker
@@ -59,21 +59,21 @@ const ColorPicker = () => {
      onChange={(color)=>{
           setColor(color); //** */ set the current color to background
           alfa.includes(color.slice(0,2)) ? setTheme('colorDark') : setTheme('colorLight');
-          //console.log(theme)
+          
         }}/>
    
     <div className="list">
     <ul>
-    {current.map((currentItem,i)=>( //* map the current array to the list
+    //* map the current array to the list
+    {current.map((currentItem,i)=>( 
       <div key={i}>{currentItem}</div>
     )
     )}
     </ul>
     </div>
     </div>
-    <h1>Current color is ... {color}</h1> {/* << apply theming*/}
+    <h1>Current color is ... {color}</h1>
     <div className="wrapper">
-    {/* << apply theming*/}
     <button
           onClick={() => {
             copyToClipboard()
@@ -82,7 +82,6 @@ const ColorPicker = () => {
         >
           Add to Clipboard
         </button>
-         {/* << apply theming*/}
         <button
           onClick={() => {
             handleColorsList();
@@ -93,7 +92,7 @@ const ColorPicker = () => {
         >
           Add to list
         </button>
-         {/* << apply theming*/}
+        
         <button
           onClick={() => {
             copyListToClipboard();
