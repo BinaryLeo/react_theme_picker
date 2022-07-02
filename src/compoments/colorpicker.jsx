@@ -54,11 +54,13 @@ const ColorPicker = () => {
     <h1>Color Picker</h1> {/* << Use Theming*/}
     <div className="grid">
 
-    <HexColorPicker color={color} onChange={(color)=>{
+    <HexColorPicker
+     color={color}
+     onChange={(color)=>{
           setColor(color); //** */ set the current color to background
           alfa.includes(color.slice(0,2)) ? setTheme('colorDark') : setTheme('colorLight');
           //console.log(theme)
-        }} />
+        }}/>
    
     <div className="list">
     <ul>
