@@ -63,7 +63,7 @@ const ColorPicker = () => {
         }}/>
    
     <div className="list">
-    //* map the current array to the list
+   
     <ul>
     {current.map((currentItem,i)=>( 
       <div key={i}>{currentItem}</div>
